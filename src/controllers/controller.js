@@ -1,6 +1,6 @@
 const urlModel = require('../models/urlModel');
 const shortid = require('shortid');
-const baseUrl = "https://localhost:3000";
+const baseUrl = "http://localhost:3000";
 const {isValid, isValidRequestBody} = require('../validator/validator')
 
 
