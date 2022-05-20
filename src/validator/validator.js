@@ -8,4 +8,8 @@ const isValidRequestBody = function(value) {
     return Object.keys(value).length > 0;
 };
 
-module.exports = {isValid,isValidRequestBody};
+const isValidLongURL = function(url) {
+    return (/^(http(s)?:\/\/)?(www.)?([a-zA-Z0-9])+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,5}(:[0-9]{1,5})?(\/[^\s]*)?$/gm).test(url);
+ }
+
+module.exports = {isValid,isValidRequestBody,isValidLongURL};

@@ -1,7 +1,7 @@
 const urlModel = require('../models/urlModel');
 const shortid = require('shortid');
 const baseUrl = "http://localhost:3000";
-const {isValid, isValidRequestBody} = require('../validator/validator');
+const {isValid, isValidRequestBody,isValidLongURL} = require('../validator/validator');
 const {promisify} = require('util');
 const {redisClient} = require('../server');
 
@@ -23,10 +23,15 @@ const urlShort = async function (req,res) {
         if(!isValid(longUrl)) {
             return res.status(400).send({status: false, message: 'Please provide longUrl'});
         };
+
+        if(!isValidLongURL(longUrl) ) { 
+            return res.status(400).send({status:false , message: 'Invalid long URL'})    
+        };
+
         const shortUrl = baseUrl + '/' + shortCode;
         const shortUrlData = await urlModel.create({
             longUrl: longUrl,
-            shortUrl: shortUrl,
+            shortUrl: shortUrl,           
             urlCode: shortCode
         });
         
