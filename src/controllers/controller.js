@@ -8,6 +8,7 @@ const {redisClient} = require('../server');
 const SET_ASYNC = promisify(redisClient.SET).bind(redisClient)
 const GET_ASYNC = promisify(redisClient.GET).bind(redisClient)
 
+//.........1st API
 
 const urlShort = async function (req,res) {
     try {
@@ -27,6 +28,7 @@ const urlShort = async function (req,res) {
         if(!isValidLongURL(longUrl) ) { 
             return res.status(400).send({status:false , message: 'Invalid long URL'})    
         };
+
         const alreadyCodeGeneratedByLongUrl = await urlModel.findOne({ longUrl: longUrl }).select({ createdAt: 0, updatedAt: 0, __v: 0,_id:0});
   
         if (alreadyCodeGeneratedByLongUrl) {
@@ -55,6 +57,8 @@ const urlShort = async function (req,res) {
         return res.status(500).send({status: false, message: error.message});
     }
 };
+
+//......2nd API
 
 const getUrlDetails = async function (req,res) {
     try {
