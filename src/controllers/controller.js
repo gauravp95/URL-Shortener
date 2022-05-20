@@ -27,7 +27,7 @@ const urlShort = async function (req,res) {
         if(!isValidLongURL(longUrl) ) { 
             return res.status(400).send({status:false , message: 'Invalid long URL'})    
         };
-        const alreadyCodeGeneratedByLongUrl = await urlModel.findOne({ longUrl: longUrl }).select({ createdAt: 0, updatedAt: 0, __v: 0 });
+        const alreadyCodeGeneratedByLongUrl = await urlModel.findOne({ longUrl: longUrl }).select({ createdAt: 0, updatedAt: 0, __v: 0,_id:0});
   
         if (alreadyCodeGeneratedByLongUrl) {
             return res.status(200).send({status: true, message: 'Already Shotened this URL', data: alreadyCodeGeneratedByLongUrl});
